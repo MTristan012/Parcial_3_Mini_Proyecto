@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <header>
-        <NavBar logo="./img/logo.png" />
+        <NavBar/>
       </header>
       <main>
         <section className="d-flex mt-3 mx-3 justify-content-between">
