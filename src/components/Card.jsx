@@ -4,7 +4,7 @@ export default function Card(stay) {
       <div className="img card-img-modified">
         <img
           className="w-100 rounded-4 object-fit-cover"
-          style="height: 16rem;"
+          style={{ height: "16rem" }}
           src={stay.photo}
           alt={stay.title}
         />
@@ -12,16 +12,17 @@ export default function Card(stay) {
       <div className="card-body justify-content-between lh-lg">
         <div className="d-flex justify-content-between">
           <div>
-            $
-            {stay.superHost
-              ? `
-                        <span class="border border-light-subtle rounded-pill fw-semibold text-body-secondary p-1" style="font-size:0.9rem text-center">
-                            SUPER HOST
-                        </span>
-                        `
-              : ""}
+            {stay.superHost ? (
+              <span
+                className="border border-light-subtle rounded-pill fw-semibold text-body-secondary p-1"
+                style={{ fontSize: "0.9rem", textAlign: "center" }}
+              >
+                SUPER HOST
+              </span>
+            ) : (
+              ""
+            )}
             <span className="text-body-secondary p-2">
-              $
               {stay.superHost
                 ? `${stay.type} ${stay.beds ? ` . ${stay.beds} beds` : ""}`
                 : stay.type}
@@ -33,7 +34,7 @@ export default function Card(stay) {
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
-                fill="currentColor"
+                fill="#dc3545"
                 className="bi bi-star-fill"
                 viewBox="0 0 16 16"
               >
@@ -44,7 +45,7 @@ export default function Card(stay) {
           </div>
         </div>
         <div className="d-flex justify-content-start">
-          <span className="fw-semibold">${stay.title}</span>
+          <span className="fw-semibold">{stay.title}</span>
         </div>
       </div>
     </>

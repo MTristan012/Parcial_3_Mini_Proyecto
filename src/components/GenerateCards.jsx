@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import Card from "./Card";
 import { Stays } from "../data/stays";
 
-export default function GenerateCards() {
+export function GenerateCards() {
   return (
     <Container>
       <Row xs={1} md={2} lg={3} xl={3} xxl={4} className="g-4">
