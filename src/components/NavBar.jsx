@@ -8,7 +8,7 @@ import OffCanvas from "./OffCanvas";
 import { InputGroup } from "react-bootstrap";
 
 
-export default function NavBar(logo) {
+export default function NavBar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
