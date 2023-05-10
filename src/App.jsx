@@ -1,3 +1,4 @@
+import { GenerateCards } from "./components/GenerateCards";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
           <div
             className="row row-cols-1 row-cols-md-2 row-cols-lg-3"
             id="container"
-          ></div>
+          >
+            <GenerateCards/>
+          </div>
         </section>
       </main>
     </>

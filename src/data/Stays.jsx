@@ -1,4 +1,4 @@
-[
+export const Stays = [
   {
     "city": "Helsinki",
     "country": "Finland",
