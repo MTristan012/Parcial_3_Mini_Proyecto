@@ -3,16 +3,15 @@ import Card from "react-bootstrap/Card";
 export default function Cards(stay) {
   return (
     <>
-      <Card className="border border-0 mt-4">
-        <div className="img card-img-modified">
-          <img
-            className="w-100 rounded-4 object-fit-cover"
-            style={{ height: "16rem" }}
-            src={stay.photo}
-            alt={stay.title}
-          />
-        </div>
-        <div className="card-body justify-content-between lh-lg">
+      <Card className="border border-0 mt-4" style={{ width: "35rem" }}>
+        <Card.Img
+          className="rounded-4 object-fit-fill "
+          style={{ height: "22rem" }}
+          src={stay.photo}
+          alt={stay.title}
+          variant="top"
+        />
+        <Card.Body className="card-body justify-content-between lh-lg">
           <div className="d-flex justify-content-between">
             <div>
               {stay.superHost ? (
@@ -50,7 +49,7 @@ export default function Cards(stay) {
           <div className="d-flex justify-content-start">
             <span className="fw-semibold">{stay.title}</span>
           </div>
-        </div>
+        </Card.Body>
       </Card>
     </>
   );

@@ -17,8 +17,8 @@ function App() {
             <span id="stays"></span> Stays
           </p>
         </section>
-
-        <section className="container text-center">
+        <br />
+        <section className="mx-3">
           <GenerateCards/>
         </section>
       </main>

@@ -1,11 +1,11 @@
-import { Container } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import Card from "./Cards";
 import { Stays } from "../data/stays";
 
 export function GenerateCards() {
   return (
-    <Container>
+    <Stack gap={2}>
       <Row xs={1} sm={1} md={2} lg={3} className="g-4">
         {Stays.map((stay, index) => (
           <Col
@@ -23,6 +23,6 @@ export function GenerateCards() {
           </Col>
         ))}
       </Row>
-    </Container>
+    </Stack>
   );
 }
