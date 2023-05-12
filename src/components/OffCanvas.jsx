@@ -4,7 +4,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
-import Fade from "react-bootstrap/Fade";
+import Collapse from "react-bootstrap/Collapse";
 
 
 export default function OffCanvas() {
@@ -41,20 +41,27 @@ export default function OffCanvas() {
             </FloatingLabel>
           </Col>
         </Row>
-        <Fade in={openLocation}>
-          <div id="example-fade-text">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </Fade>
-        <Fade in={openGuests}>
-          <div id="example-fade-text">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </Fade>
+        <Row className="g-2">
+          <Col md>
+            <Collapse in={openLocation}>
+              <div id="example-fade-text">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+                labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </Collapse>
+          </Col>
+          <Col md>
+            <Collapse in={openGuests}>
+              <div id="example-fade-text">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+                labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </Collapse>
+          </Col>
+        </Row>
+
       </Offcanvas.Body>
     </>
   );
