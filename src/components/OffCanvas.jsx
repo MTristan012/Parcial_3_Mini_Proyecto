@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
+import LocationList from "./LocationList";
 
 
 export default function OffCanvas() {
@@ -45,23 +46,21 @@ export default function OffCanvas() {
           <Col md>
             <Collapse in={openLocation}>
               <div id="example-fade-text">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                labore wes anderson cred nesciunt sapiente ea proident.
+                <LocationList />
               </div>
             </Collapse>
           </Col>
           <Col md>
             <Collapse in={openGuests}>
               <div id="example-fade-text">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                labore wes anderson cred nesciunt sapiente ea proident.
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
               </div>
             </Collapse>
           </Col>
         </Row>
-
       </Offcanvas.Body>
     </>
   );
