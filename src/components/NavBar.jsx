@@ -14,7 +14,7 @@ export default function NavBar() {
   const handleShow = () => setShow(true);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       <Container fluid>
         <Navbar.Brand href="#">
           <img src="../../static/logo.png" alt="Logo" />
