@@ -4,6 +4,9 @@ import Card from "./Cards";
 import { Stays } from "../data/stays";
 
 export function GenerateCards() {
+  /*const filterLocation = Stays.filter(
+    (stay) => stay.city === "Oulu" && stay.maxGuests >= 3
+  );*/
   return (
     <Stack gap={2}>
       <Row xs={1} sm={1} md={2} lg={3} className="g-4">
