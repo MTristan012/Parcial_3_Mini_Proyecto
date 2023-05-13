@@ -41,7 +41,7 @@ export default function OffCanvas() {
               aria-controls="example-fade-text"
               aria-expanded={openGuests}
             >
-              <Form.Control placeholder="Add guests" value={adult + child}/>
+              <Form.Control placeholder="Add guests" defaultValue={adult + child}/>
             </FloatingLabel>
           </Col>
         </Row>
