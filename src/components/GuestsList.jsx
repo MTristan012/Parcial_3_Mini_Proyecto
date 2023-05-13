@@ -1,10 +1,7 @@
 import Button from "react-bootstrap/Button";
 
-export default function GuestsList() {
-  let child;
-  let adult;
-  let setAdult;
-  let setChild;
+// eslint-disable-next-line react/prop-types
+export default function GuestsList({child, adult, setChild, setAdult}) {
 
   function incrementAdult() {
     if (child < 10 - adult) {
