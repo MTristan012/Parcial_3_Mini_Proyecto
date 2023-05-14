@@ -14,6 +14,7 @@ export default function OffCanvas() {
   const [openGuests, setOpenGuests] = useState(false);
   const [child, setChild] = useState(0);
   const [adult, setAdult] = useState(0);
+  const totalGuests = child + adult
 
   return (
     <>
@@ -41,7 +42,7 @@ export default function OffCanvas() {
               aria-controls="example-fade-text"
               aria-expanded={openGuests}
             >
-              <Form.Control placeholder="Add guests" defaultValue={adult + child}/>
+              <Form.Control placeholder="Add guests" readOnly value={totalGuests} id="totalGuests"/>
             </FloatingLabel>
           </Col>
         </Row>
