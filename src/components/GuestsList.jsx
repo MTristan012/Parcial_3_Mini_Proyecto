@@ -22,6 +22,7 @@ export default function GuestsList({child, adult, setChild, setAdult}) {
   function decrementChild() {
     setChild(child - 1);
   }
+
   return (
     <>
       <br />

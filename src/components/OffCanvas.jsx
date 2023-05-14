@@ -36,13 +36,13 @@ export default function OffCanvas() {
           </Col>
           <Col md>
             <FloatingLabel
-              controlId="floatingInputGrid"
+              controlId="totalGuests"
               label="Guests"
               onClick={() => setOpenGuests(!openGuests)}
               aria-controls="example-fade-text"
               aria-expanded={openGuests}
             >
-              <Form.Control placeholder="Add guests" readOnly value={totalGuests} id="totalGuests"/>
+              <Form.Control placeholder="Add guests" readOnly value={totalGuests}/>
             </FloatingLabel>
           </Col>
         </Row>
