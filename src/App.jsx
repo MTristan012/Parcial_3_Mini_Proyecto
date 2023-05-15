@@ -1,4 +1,3 @@
-import { GenerateCards } from "./components/GenerateCards";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -12,6 +11,9 @@ import Row from "react-bootstrap/Row";
 import Collapse from "react-bootstrap/Collapse";
 import LocationList from "./components/LocationList";
 import GuestsList from "./components/GuestsList";
+import { Stack } from "react-bootstrap";
+import Card from "./components/Cards";
+import { Stays } from "./data/stays";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -23,6 +25,17 @@ function App() {
   const [adult, setAdult] = useState(0);
   const totalGuests = child + adult;
   const [city, setCity] = useState("");
+  const [filteredStays, setFilteredStays] = useState(Stays);
+
+  const handleFilter = () => {
+    const filtered = Stays.filter(
+      (stay) =>
+        stay.city == city.split(" ")[0].replace(/,$/, "") &&
+        stay.maxGuests >= adult + child
+    );
+    setFilteredStays(filtered);
+    handleClose();
+  };
 
   return (
     <>
@@ -40,6 +53,7 @@ function App() {
                   aria-label="Search"
                   onClick={handleShow}
                   value={city ? city : "add Location"}
+                  readOnly
                 />
                 <Form.Control
                   placeholder="add Guest"
@@ -47,6 +61,7 @@ function App() {
                   aria-label="Search"
                   onClick={handleShow}
                   value={totalGuests ? totalGuests + " Guests" : "Add Guests"}
+                  readOnly
                 />
                 <Button variant="outline-success">
                   <svg
@@ -98,10 +113,10 @@ function App() {
                       >
                         <Form.Control
                           placeholder="Add guests"
-                          readOnly
                           value={
                             totalGuests ? totalGuests + " Guests" : "add Guests"
                           }
+                          readOnly
                         />
                       </FloatingLabel>
                     </Col>
@@ -110,10 +125,7 @@ function App() {
                     <Col md>
                       <Collapse in={openLocation}>
                         <div id="Location">
-                          <LocationList 
-                          city={city}
-                          setCity={setCity}
-                          />
+                          <LocationList city={city} setCity={setCity} />
                         </div>
                       </Collapse>
                     </Col>
@@ -130,7 +142,12 @@ function App() {
                       </Collapse>
                     </Col>
                   </Row>
-                  <Button variant="danger" type="submit" value="Submit">
+                  <Button
+                    variant="danger"
+                    type="submit"
+                    value="Submit"
+                    onClick={handleFilter}
+                  >
                     <span className="align-items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -158,12 +175,37 @@ function App() {
             <span id="place"> Finland</span>
           </h1>
           <p>
-            <span id="stays"></span> Stays
+            <span id="stays">{filteredStays ? filteredStays.length : Stays.length}</span> Stays
           </p>
         </section>
         <br />
         <section className="mx-3">
-          <GenerateCards totalGuests={totalGuests} />
+          <Stack gap={2}>
+            <Row xs={1} sm={1} md={2} lg={3} className="g-4">
+              {filteredStays.length > 0 ? (
+                filteredStays.map((stay, index) => (
+                  <Col
+                    key={index}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <Card
+                      photo={stay.photo}
+                      title={stay.title}
+                      superHost={stay.superHost}
+                      type={stay.type}
+                      beds={stay.beds}
+                      rating={stay.rating}
+                    />
+                  </Col>
+                ))
+              ) : (
+                <p>
+                  No hay alojamientos disponibles que coincidan con los
+                  criterios de búsqueda.
+                </p>
+              )}
+            </Row>
+          </Stack>
         </section>
       </main>
     </>

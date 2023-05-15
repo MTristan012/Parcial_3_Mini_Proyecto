@@ -3,12 +3,19 @@ import { Row, Col } from "react-bootstrap";
 import Card from "./Cards";
 import { Stays } from "../data/stays";
 
-export function GenerateCards() {
+export function GenerateCards(city,adult,child) {
+  console.log(city)
+  console.log(adult);
+  console.log(child);
+
+   const filteredStays = Stays.filter((stay) => {
+     return stay.city === city && stay.maxGuests >= adult + child;
+   });
 
   return (
     <Stack gap={2}>
       <Row xs={1} sm={1} md={2} lg={3} className="g-4">
-        {Stays.map((stay, index) => (
+        {filteredStays.map((stay, index) => (
           <Col
             key={index}
             className="d-flex align-items-center justify-content-center"
