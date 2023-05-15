@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { stays } from "../data/Stays";
+import { Stays } from "../data/Stays";
 
 export const GlobalContext = createContext();
 
@@ -9,7 +9,7 @@ const GlobalContextProvider = ({ children }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setContents([...stays]);
+      setContents([...Stays]);
     }, 5000);
     return () => clearTimeout(timer);
   }, []);

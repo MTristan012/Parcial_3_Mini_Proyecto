@@ -3,18 +3,66 @@ import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useState } from "react";
-import Collapse from "react-bootstrap/Collapse";
+import { useState, useContext, useEffect } from "react";
 import LocationList from "./LocationList";
 import GuestsList from "./GuestsList";
 import Button from "react-bootstrap/Button";
+import { GlobalContext } from "../context/GlobalContext";
+import { HeaderContext } from "../context/HeaderContext";
 
 export default function OffCanvas() {
-  const [openLocation, setOpenLocation] = useState(false);
-  const [openGuests, setOpenGuests] = useState(false);
-  const [child, setChild] = useState(0);
-  const [adult, setAdult] = useState(0);
-  const totalGuests = child + adult
+
+  const { filterContent } = useContext(GlobalContext);
+  const {
+    clicked,
+    whatClicked,
+    locationValue,
+    guestValue,
+    handleClick,
+    setLocationValue,
+    setGuestValue,
+    setWhatClicked,
+    setClicked,
+  } = useContext(HeaderContext);
+
+  const [adultCount, setAdultCount] = useState(0);
+  const [childrenCount, setChildrenCount] = useState(0);
+
+  const incrementDecrement = (e) => {
+    switch (e.target.ariaLabel) {
+      case "adult plus button":
+        setAdultCount(adultCount + 1);
+        break;
+      case "adult minus button":
+        if (adultCount > 0) setAdultCount(adultCount - 1);
+        break;
+      case "children plus button":
+        setChildrenCount(childrenCount + 1);
+        break;
+      case "children minus button":
+        if (childrenCount > 0) setChildrenCount(childrenCount - 1);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (adultCount > 0 || childrenCount > 0) {
+      setGuestValue(adultCount + childrenCount + " guests");
+    } else {
+      setGuestValue("");
+    }
+  }, [setGuestValue, adultCount, childrenCount]);
+
+  const handleSubmit = (e) => {
+    if (locationValue) {
+      setClicked(!clicked);
+      filterContent(locationValue, guestValue);
+    }
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -25,49 +73,51 @@ export default function OffCanvas() {
         <Row className="g-2 col order-md-first">
           <Col md>
             <FloatingLabel
-              controlId="floatingInputGrid"
-              label="Location"
-              onClick={() => setOpenLocation(!openLocation)}
-              aria-controls="example-fade-text"
-              aria-expanded={openLocation}
+              location
+              whatClicked={whatClicked}
+              htmlFor="location"
             >
-              <Form.Control type="email" placeholder="name@example.com" />
+              <Form.Control
+                type="text"
+                name="location"
+                value={locationValue}
+                placeholder="Search Location"
+                autoComplete="off"
+                onClick={(e) => setWhatClicked(e.target.name)}
+                readOnly
+              />
             </FloatingLabel>
           </Col>
           <Col md>
-            <FloatingLabel
-              controlId="totalGuests"
-              label="Guests"
-              onClick={() => setOpenGuests(!openGuests)}
-              aria-controls="example-fade-text"
-              aria-expanded={openGuests}
-            >
-              <Form.Control placeholder="Add guests" readOnly value={totalGuests}/>
+            <FloatingLabel guest whatClicked={whatClicked} htmlFor="guests">
+              <Form.Control
+                type="text"
+                name="guests"
+                value={guestValue}
+                placeholder="Add Guest"
+                autoComplete="off"
+                onClick={(e) => setWhatClicked(e.target.name)}
+                readOnly
+              />
             </FloatingLabel>
           </Col>
         </Row>
-        <Row className="g-2">
-          <Col md>
-            <Collapse in={openLocation}>
-              <div id="example-fade-text">
-                <LocationList />
-              </div>
-            </Collapse>
-          </Col>
-          <Col md>
-            <Collapse in={openGuests}>
-              <div id="example-fade-text">
-                <GuestsList
-                  child={child}
-                  adult={adult}
-                  setChild={setChild}
-                  setAdult={setAdult}
-                />
-              </div>
-            </Collapse>
-          </Col>
-        </Row>
-        <Button variant="danger" type="submit" value="Submit">
+        {whatClicked === "location" && (
+          <LocationList setLocationValue={setLocationValue} />
+        )}
+        {whatClicked === "guests" && (
+          <GuestsList
+            adultCount={adultCount}
+            childrenCount={childrenCount}
+            incrementDecrement={incrementDecrement}
+          />
+        )}
+        <Button
+          variant="danger"
+          type="submit"
+          value="Submit"
+          onSubmit={handleSubmit + handleClick}
+        >
           <span className="align-items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

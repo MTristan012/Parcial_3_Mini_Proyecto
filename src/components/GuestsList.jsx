@@ -1,28 +1,11 @@
 import Button from "react-bootstrap/Button";
 
 // eslint-disable-next-line react/prop-types
-export default function GuestsList({child, adult, setChild, setAdult}) {
-
-  function incrementAdult() {
-    if (child < 10 - adult) {
-      setAdult(adult + 1);
-    }
-  }
-
-  function decrementAdult() {
-    setAdult(adult - 1);
-  }
-
-  function incrementChild() {
-    if (adult < 10 - child) {
-      setChild(child + 1);
-    }
-  }
-
-  function decrementChild() {
-    setChild(child - 1);
-  }
-
+export default function GuestsList({ adultCount, childrenCount, incrementDecrement }) {
+  const handleClick = (e) => {
+    e.preventDefault();
+    incrementDecrement(e);
+  };
   return (
     <>
       <br />
@@ -32,11 +15,7 @@ export default function GuestsList({child, adult, setChild, setAdult}) {
           Age 13 or above
         </h6>
         <div>
-          <Button
-            variant="outline-dark"
-            onClick={decrementAdult}
-            disabled={adult <= 0}
-          >
+          <Button variant="outline-dark" onClick={(e) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -51,12 +30,8 @@ export default function GuestsList({child, adult, setChild, setAdult}) {
               />
             </svg>
           </Button>
-          <span>{adult}</span>
-          <Button
-            variant="outline-dark"
-            onClick={incrementAdult}
-            disabled={adult >= 10}
-          >
+          <span>{adultCount}</span>
+          <Button variant="outline-dark" onClick={(e) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -82,8 +57,7 @@ export default function GuestsList({child, adult, setChild, setAdult}) {
         <div>
           <Button
             variant="outline-dark"
-            onClick={decrementChild}
-            disabled={child <= 0}
+            onClick={(e) => handleClick(e)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +73,10 @@ export default function GuestsList({child, adult, setChild, setAdult}) {
               />
             </svg>
           </Button>
-          <span>{child}</span>
+          <span>{childrenCount}</span>
           <Button
             variant="outline-dark"
-            onClick={incrementChild}
-            disabled={child >= 10}
+            onClick={e => handleClick(e)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
