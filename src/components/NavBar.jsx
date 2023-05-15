@@ -3,14 +3,11 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import OffCanvas from "./OffCanvas";
 import { InputGroup } from "react-bootstrap";
-import { HeaderContext } from "../context/HeaderContext";
-
 
 export default function NavBar() {
-  const { locationValue, guestValue, handleClick } = useContext(HeaderContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,7 +18,7 @@ export default function NavBar() {
         <Navbar.Brand href="#">
           <img src="../../static/logo.png" alt="Logo" />
         </Navbar.Brand>
-        <Form className="d-flex" onClick={(e) => handleClick(e)}>
+        <Form className="d-flex">
           <InputGroup>
             <Form.Control
               type="search"
@@ -29,7 +26,6 @@ export default function NavBar() {
               className="me-0"
               aria-label="Search"
               onClick={handleShow}
-              value={locationValue}
             />
             <Form.Control
               type="search"
@@ -37,7 +33,6 @@ export default function NavBar() {
               className="me-0"
               aria-label="Search"
               onClick={handleShow}
-              value={guestValue}
             />
             <Button variant="outline-success">
               <svg
