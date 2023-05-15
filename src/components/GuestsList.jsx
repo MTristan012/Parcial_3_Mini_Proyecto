@@ -50,7 +50,7 @@ export default function GuestsList({ child, adult, setChild, setAdult }) {
               />
             </svg>
           </Button>
-          <span>{adult}</span>
+          <span className="mx-3">{adult}</span>
           <Button
             variant="outline-dark"
             onClick={incrementAdult}
@@ -98,7 +98,7 @@ export default function GuestsList({ child, adult, setChild, setAdult }) {
               />
             </svg>
           </Button>
-          <span>{child}</span>
+          <span className="mx-3">{child}</span>
           <Button
             variant="outline-dark"
             onClick={incrementChild}
