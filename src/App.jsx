@@ -14,6 +14,7 @@ import GuestsList from "./components/GuestsList";
 import { Stack } from "react-bootstrap";
 import Card from "./components/Cards";
 import { Stays } from "./data/stays";
+import Footer from "./components/Footer"
 
 function App() {
   const [show, setShow] = useState(false);
@@ -28,11 +29,25 @@ function App() {
   const [filteredStays, setFilteredStays] = useState(Stays);
 
   const handleFilter = () => {
-    const filtered = Stays.filter(
-      (stay) =>
-        stay.city == city.split(" ")[0].replace(/,$/, "") &&
-        stay.maxGuests >= adult + child
-    );
+    let filtered;
+
+    if (city && !adult && !child) {
+      
+      filtered = Stays.filter(
+        (stay) => stay.city == city.split(" ")[0].replace(/,$/, "")
+      );
+    } else if (!city && (adult || child)) {
+      
+      filtered = Stays.filter((stay) => stay.maxGuests >= adult + child);
+    } else {
+      
+      filtered = Stays.filter(
+        (stay) =>
+          stay.city === city.split(" ")[0].replace(/,$/, "") &&
+          stay.maxGuests >= adult + child
+      );
+    }
+
     setFilteredStays(filtered);
     handleClose();
   };
@@ -121,16 +136,22 @@ function App() {
                       </FloatingLabel>
                     </Col>
                   </Row>
-                  <Row className="g-2 d-flex">
-                    <Col md className="d-flex ustify-content-sm-center">
+                  <Row className="g-2">
+                    <Col
+                      md
+                      className="d-flex justify-content-center justify-content-md-start"
+                    >
                       <Collapse in={openLocation}>
                         <div id="Location">
                           <LocationList city={city} setCity={setCity} />
                         </div>
                       </Collapse>
                     </Col>
-                    <Col md className="d-flex justify-content-sm-center mb-3">
-                      <Collapse in={openGuests} className="">
+                    <Col
+                      md
+                      className="d-flex justify-content-center mb-3 justify-content-md-start"
+                    >
+                      <Collapse in={openGuests}>
                         <div id="Guests">
                           <GuestsList
                             child={child}
@@ -174,11 +195,13 @@ function App() {
         <section className="d-flex mt-3 mx-3 justify-content-between">
           <h1 className="fs-3">
             Stays in
-            <span id="place"> Finland</span>
+            <span id="place" className="mx-2">
+              {city ? city.split(" ")[0].replace(/,$/, "") : "Finland"}
+            </span>
           </h1>
           <p>
             <span id="stays">
-              {filteredStays ? filteredStays.length : Stays.length}
+              {filteredStays ? filteredStays.length + "+" : Stays.length + "+"}
             </span>{" "}
             Stays
           </p>
@@ -213,6 +236,9 @@ function App() {
           </Stack>
         </section>
       </main>
+      <footer className="text-center">
+        <Footer />
+      </footer>
     </>
   );
 }
