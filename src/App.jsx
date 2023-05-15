@@ -121,16 +121,16 @@ function App() {
                       </FloatingLabel>
                     </Col>
                   </Row>
-                  <Row className="g-2">
-                    <Col md>
+                  <Row className="g-2 d-flex">
+                    <Col md className="d-flex ustify-content-sm-center">
                       <Collapse in={openLocation}>
                         <div id="Location">
                           <LocationList city={city} setCity={setCity} />
                         </div>
                       </Collapse>
                     </Col>
-                    <Col md>
-                      <Collapse in={openGuests}>
+                    <Col md className="d-flex justify-content-sm-center mb-3">
+                      <Collapse in={openGuests} className="">
                         <div id="Guests">
                           <GuestsList
                             child={child}
@@ -142,26 +142,28 @@ function App() {
                       </Collapse>
                     </Col>
                   </Row>
-                  <Button
-                    variant="danger"
-                    type="submit"
-                    value="Submit"
-                    onClick={handleFilter}
-                  >
-                    <span className="align-items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-search"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                      </svg>
-                    </span>
-                    <span className="ms-2">Search</span>
-                  </Button>
+                  <Row>
+                    <Button
+                      variant="danger"
+                      type="submit"
+                      value="Submit"
+                      onClick={handleFilter}
+                    >
+                      <span className="align-items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-search"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                      </span>
+                      <span className="ms-2">Search</span>
+                    </Button>
+                  </Row>
                 </Offcanvas.Body>
               </Offcanvas>
             </Form>
@@ -175,7 +177,10 @@ function App() {
             <span id="place"> Finland</span>
           </h1>
           <p>
-            <span id="stays">{filteredStays ? filteredStays.length : Stays.length}</span> Stays
+            <span id="stays">
+              {filteredStays ? filteredStays.length : Stays.length}
+            </span>{" "}
+            Stays
           </p>
         </section>
         <br />
@@ -186,7 +191,7 @@ function App() {
                 filteredStays.map((stay, index) => (
                   <Col
                     key={index}
-                    className="d-flex align-items-center justify-content-center"
+                    className="d-flex align-items-start justify-content-center"
                   >
                     <Card
                       photo={stay.photo}
