@@ -22,7 +22,7 @@ function App() {
   const [child, setChild] = useState(0);
   const [adult, setAdult] = useState(0);
   const totalGuests = child + adult;
-  const city = ""
+  const [city, setCity] = useState("");
 
   return (
     <>
@@ -35,7 +35,6 @@ function App() {
             <Form className="d-flex">
               <InputGroup>
                 <Form.Control
-                  type="search"
                   placeholder="add Location"
                   className="me-0"
                   aria-label="Search"
@@ -43,7 +42,6 @@ function App() {
                   value={city ? city : "add Location"}
                 />
                 <Form.Control
-                  type="search"
                   placeholder="add Guest"
                   className="me-0"
                   aria-label="Search"
@@ -80,13 +78,13 @@ function App() {
                         controlId="floatingInputGrid"
                         label="Location"
                         onClick={() => setOpenLocation(!openLocation)}
-                        aria-controls="example-fade-text"
+                        aria-controls="cityLocation"
                         aria-expanded={openLocation}
                       >
                         <Form.Control
-                          type="text"
                           placeholder="add Location"
                           value={city ? city : "add Location"}
+                          readOnly
                         />
                       </FloatingLabel>
                     </Col>
@@ -112,7 +110,10 @@ function App() {
                     <Col md>
                       <Collapse in={openLocation}>
                         <div id="Location">
-                          <LocationList />
+                          <LocationList 
+                          city={city}
+                          setCity={setCity}
+                          />
                         </div>
                       </Collapse>
                     </Col>

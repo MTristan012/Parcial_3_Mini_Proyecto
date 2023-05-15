@@ -1,6 +1,8 @@
 import ListGroup from "react-bootstrap/ListGroup";
 
-export default function LocationList() {
+
+// eslint-disable-next-line react/prop-types
+export default function LocationList({setCity}) {
   const Location = [
     "Helsinki, Finland",
     "Turku, Finland",
@@ -8,10 +10,19 @@ export default function LocationList() {
     "Oulu, Finland",
   ];
 
+  const handleLocation = (location) => {
+    setCity(location);
+    // Realiza otras acciones con el nombre de la ubicación seleccionada
+  };
+
   return (
     <ListGroup className="mt-2">
       {Location.map((location, id) => (
-        <ListGroup.Item key={id} className="border-0 border">
+        <ListGroup.Item
+          key={id}
+          className="border-0 border"
+          onClick={() => handleLocation(location)}
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
