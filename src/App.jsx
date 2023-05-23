@@ -58,7 +58,7 @@ function App() {
         <Navbar expand="lg">
           <Container fluid>
             <Navbar.Brand href="#">
-              <img src="../public/logo.svg" alt="Logo" />
+              <img src="./logo.svg" alt="Logo" />
             </Navbar.Brand>
             <Form className="d-flex">
               <InputGroup>
